@@ -1,11 +1,6 @@
 package org.andestech.learning.rfb19.g3;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.FileOutputStream;
-import java.io.FileInputStream;
+import java.io.*;
 import java.util.Date;
 
 
@@ -115,8 +110,56 @@ public class AppFIO {
 
      //-----------------------------------------------------------
 
+        File f5 = new File("e:\\datas3\\file5.bin");
+        try(DataOutputStream dos =
+                new DataOutputStream(new FileOutputStream(f5)))
+        {
+            int i = 87687632; // 4 bytes
+            long L = 1000_333_444_555_666_777L; // 8 bytes
+
+            dos.writeInt(i);
+            dos.writeLong(L);
 
 
+        }
+ catch (IOException ex){
+        ex.printStackTrace();
+    }
+
+       // читатель
+
+        try(DataInputStream dis =
+                    new DataInputStream(new FileInputStream(f5)))
+        {
+            int i = dis.readInt(); // 4 bytes
+            long L = dis.readLong(); // 8 bytes
+
+
+
+            System.out.println("i=" + i + ", L=" + L);
+        }
+        catch (IOException ex){
+            ex.printStackTrace();
+        }
+
+//----------------------------------------------
+        // RAF
+        System.out.println("-------------------- RAF ------------------");
+
+        File f6 = new File("e:\\datas3\\file_raf.txt");
+
+        try(RandomAccessFile raf = new RandomAccessFile(f6,"rw"))
+        {
+            raf.write("DATA TEST 1234\r\nHELLO!!".getBytes());
+           int size = (int)raf.length(); // 1
+           int size2 = (int)raf.getFilePointer();
+            System.out.println("size2=" + size2 + ", size=" + size);
+
+
+        }
+        catch (IOException ex){
+            ex.printStackTrace();
+        }
 
 
     }
