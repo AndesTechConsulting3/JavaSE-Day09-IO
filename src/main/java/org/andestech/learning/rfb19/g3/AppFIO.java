@@ -1,6 +1,7 @@
 package org.andestech.learning.rfb19.g3;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -62,6 +63,20 @@ public class AppFIO {
         catch (IOException ex){
             ex.printStackTrace();
         }
+
+
+        try(FileReader fr1 = new FileReader("e:\\datas3\\file3.txt"))
+        {
+            int ch;
+            while( (ch = fr1.read()) != -1   )
+            {
+                System.out.print((char)ch);
+            }
+         }
+        catch (IOException ex){
+            ex.printStackTrace();
+        }
+
 
 
     }
