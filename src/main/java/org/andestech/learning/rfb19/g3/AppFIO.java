@@ -221,7 +221,7 @@ public class AppFIO {
                 ex.printStackTrace();
 
 
-         //-----------NIO-----------------
+         //----------- NIO read and copy files -----------------
     }
 
         System.out.println("---------------- NIO paths ----------------");
