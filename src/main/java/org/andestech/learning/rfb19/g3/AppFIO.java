@@ -1,7 +1,12 @@
 package org.andestech.learning.rfb19.g3;
 
 import java.io.*;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import java.nio.file.*;
 
 
 public class AppFIO {
@@ -150,7 +155,7 @@ public class AppFIO {
 
         try(RandomAccessFile raf = new RandomAccessFile(f6,"rw"))
         {
-            raf.write("DATA TEST 1234\r\nHELLO!!".getBytes());
+            raf.write("Дата2 TEST 1234\r\nHELLO!!".getBytes());
            int size = (int)raf.length(); // 1
            int size2 = (int)raf.getFilePointer();
            System.out.println("size2=" + size2 + ", size=" + size);
@@ -170,6 +175,63 @@ public class AppFIO {
         catch (IOException ex){
             ex.printStackTrace();
         }
+
+
+        Book book3 =
+                new Book(1869,"GG-864876","Лев Толстой","Война и Мир");
+        book3.printBookInfo();
+
+        Book book4 =
+                new Book(1889,"GT-823464876","Лев Толстой","Крейцерова соната");
+
+        ArrayList<Book> books =
+                new ArrayList<>();
+
+        books.add(book3);
+        books.add(book4);
+
+        // --- Object stream
+
+        File f7 = new File("e:\\datas3\\books.library");
+
+        try(ObjectOutputStream oos =
+                new ObjectOutputStream(new FileOutputStream(f7))){
+
+         oos.writeObject(books);
+
+        }
+        catch (IOException ex){
+        ex.printStackTrace();}
+
+        //--------------- Читатель -------------------------
+
+        ArrayList<Book> books_from_disk =
+                new ArrayList<>();
+
+            try(ObjectInputStream ois =
+                    new ObjectInputStream(new FileInputStream(f7))){
+
+                books_from_disk =   ( ArrayList<Book>)ois.readObject();
+                System.out.println(books_from_disk);
+            }
+        catch (IOException | ClassNotFoundException ex){
+                ex.printStackTrace();
+
+
+         //-----------NIO-----------------
+    }
+
+        System.out.println("---------------- NIO paths ----------------");
+    Path path = Paths.get("e:\\datas3\\file_raf.txt");
+        try {
+            System.out.println(new String(Files.readAllBytes(path)));
+
+            Files.copy(path, Paths.get("e:\\datas3\\file_raf2.txt"),StandardCopyOption.REPLACE_EXISTING);
+        }catch (IOException ex){ex.printStackTrace();}
+
+        //-----------------------------------
+
+
 
 
     }
