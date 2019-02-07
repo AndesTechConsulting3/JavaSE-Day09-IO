@@ -2,11 +2,14 @@ package org.andestech.learning.rfb19.g3;
 
 import java.io.*;
 import java.lang.reflect.Array;
+import java.nio.ByteBuffer;
+import java.nio.channels.WritableByteChannel;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import java.nio.file.*;
+import java.nio.channels.Channels;
 
 
 public class AppFIO {
@@ -229,10 +232,24 @@ public class AppFIO {
             Files.copy(path, Paths.get("e:\\datas3\\file_raf2.txt"),StandardCopyOption.REPLACE_EXISTING);
         }catch (IOException ex){ex.printStackTrace();}
 
-        //-----------------------------------
+        //----------------------------------- NIO write simple data -----------
 
 
+        try(
+        WritableByteChannel rbc =
+                Channels.newChannel(new DataOutputStream(
+                        new FileOutputStream("e:\\datas3\\test_channel.txt")));
+        ){
 
+            byte[] arr = "aSJDLKASDHLAKSDHLK\r\nYIYIUY".getBytes();
+
+            ByteBuffer bb = ByteBuffer.allocate(arr.length);
+            bb.put(arr);
+            bb.flip();
+
+            rbc.write(bb);
+        }
+        catch (IOException ex){ex.printStackTrace();}
 
     }
 }
