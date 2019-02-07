@@ -153,7 +153,17 @@ public class AppFIO {
             raf.write("DATA TEST 1234\r\nHELLO!!".getBytes());
            int size = (int)raf.length(); // 1
            int size2 = (int)raf.getFilePointer();
-            System.out.println("size2=" + size2 + ", size=" + size);
+           System.out.println("size2=" + size2 + ", size=" + size);
+
+            byte[] arr = new byte[size];
+
+            raf.seek(0);
+            raf.write("data".getBytes());
+
+            raf.seek(0);
+            raf.read(arr);
+
+            System.out.println( new String(arr,"utf8"));
 
 
         }
