@@ -1,5 +1,6 @@
 package org.andestech.learning.rfb19.g3;
 
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Random;
@@ -39,6 +40,7 @@ public class Book implements Serializable {
         this.author = author;
     }
 
+    @XmlAttribute(name = "Название")
     public String getTitle() {
         return title;
     }
