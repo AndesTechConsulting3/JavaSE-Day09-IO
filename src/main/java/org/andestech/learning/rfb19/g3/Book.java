@@ -1,8 +1,10 @@
 package org.andestech.learning.rfb19.g3;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Random;
 
+@XmlRootElement(name = "Book")
 public class Book implements Serializable {
 
     private static final int minYear=1400, maxYear;
