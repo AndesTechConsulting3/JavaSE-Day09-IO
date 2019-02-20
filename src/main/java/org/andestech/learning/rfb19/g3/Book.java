@@ -64,7 +64,7 @@ public class Book implements Serializable {
     public Book(){
         // minYear = -100;
         counter++;
-        System.out.println("++ ctor, o: " + this);
+        //System.out.println("++ ctor, o: " + this);
         //
         invNumber = new Random().nextInt(2500000);
     }
@@ -75,6 +75,7 @@ public class Book implements Serializable {
         this.isbn = isbn;
         this.author = author;
         this.title = title;
+        System.out.println("++ ctor, o: " + this);
     }
 
     public int getInvNumber(){return invNumber;}

@@ -9,7 +9,10 @@ import java.util.List;
 @XmlRootElement
 public class Library {
 
+
+
     public Library(){
+        bookList = new ArrayList<>();
             }
 
     @XmlElement(name = "Book")
@@ -22,6 +25,16 @@ public class Library {
     }
 
     private List<Book> bookList;
+
+    public void addBook(Book book){
+        bookList.add(book);
+
+    }
+
+    public void rmBook(Book book)
+    {
+        bookList.remove(book);
+    }
 
 
 
